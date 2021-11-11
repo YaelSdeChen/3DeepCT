@@ -79,6 +79,11 @@ def evaluate(exp_dir, trained_model, testing_params: dict, loss_params: dict):
 
 
 if __name__ == '__main__':
+    '''
+    Example command:
+
+    python eval.py --exp_dir experiments/example
+    '''
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # device = 'cpu'
@@ -87,7 +92,6 @@ if __name__ == '__main__':
     parser.add_argument('--exp_dir', type=str, help='Path to experiment directory')
     args = parser.parse_args()
 
-    # exp_dir = "/home/yaelsc/PycharmProjects/3DeepCT/experiments/example"
     with open(f'{args.exp_dir}/config.json') as json_file:
         config = json.load(json_file)
     testing_params = config['testing']
