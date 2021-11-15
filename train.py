@@ -115,6 +115,7 @@ if __name__ == '__main__':
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # device = 'cpu'
+    print(f"Device: {device}")
 
     parser = ArgumentParser()
     parser.add_argument('--exp_dir', type=str, help='Path to experiment directory')
@@ -131,5 +132,6 @@ if __name__ == '__main__':
     net.to(device)
 
     # main
-    train(args.exp_dir, net, optimizer_params, training_params, loss_params, load_checkpoint=training_params["use_pretrain"],
+    train(args.exp_dir, net, optimizer_params, training_params, loss_params,
+          load_checkpoint=training_params["use_pretrain"],
           checkpoint_path=training_params["pretrain_path"])

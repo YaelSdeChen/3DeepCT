@@ -25,7 +25,7 @@ conda activate 3DeepCT
 
 Install required packages:
 ```
-conda install --yes -c pytorch pytorch=1.10.0 torchvision cudatoolkit=<CUDA_VERSION>
+conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=10.1 -c pytorch
 pip install -r requirements.txt
 ```
 

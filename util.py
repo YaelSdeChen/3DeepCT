@@ -1,13 +1,15 @@
 import torch
 import numpy as np
+
 from network.DeepCT import DeepCT
-from data.clouds_dataset import CloudsDataset
 from torch.optim.lr_scheduler import ReduceLROnPlateau
+from datasets.clouds_train_dataset import CloudsDataset
 from torch.utils.data.sampler import SubsetRandomSampler
+from datasets.clouds_test_dataset import CloudsTestDataset
 
 
 def get_dataloaders(dataloader_params: dict, batch_size: int):
-    train_dataset = CloudsDataset(is_train=True, data_paths=dataloader_params["path"], key=dataloader_params["key"])
+    train_dataset = CloudsDataset(data_paths=dataloader_params["path"], key=dataloader_params["key"])
     num_train = len(train_dataset)
     indices = list(range(num_train))
     split = int(np.floor(dataloader_params['eval_percent'] * num_train))
@@ -66,7 +68,7 @@ def get_scheduler(scheduler_params: dict, optimizer):
 
 
 def get_test_dataloader(dataloader_params: dict, batch_size: int):
-    test_dataset = CloudsDataset(is_train=False, data_paths=dataloader_params["path"], key=dataloader_params["key"])
+    test_dataset = CloudsTestDataset(data_paths=dataloader_params["path"], key=dataloader_params["key"])
 
     test_loader = torch.utils.data.DataLoader(
         test_dataset, batch_size=batch_size, shuffle=False, num_workers=dataloader_params['num_workers']

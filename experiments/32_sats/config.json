@@ -1,0 +1,49 @@
+{
+  "optimizer": {
+    "lr": 1e-3
+  },
+  "training": {
+    "batch_size": 32,
+    "max_epochs": 1000,
+    "train_loader": {
+      "path": ["/wdata/yaelsc/Data/32_sats/08_10_2020"],
+      "shuffle": "True",
+      "num_workers": 16,
+      "eval_percent": 0.2,
+      "key": "beta"
+    },
+    "loss_momentum": 0.5,
+    "save_model_gap": 1,
+    "scheduler": {
+      "name": "StepLR",
+      "step_size": 10,
+      "gamma": 0.9
+    },
+    "eval_epoch_gap": 10,
+    "use_pretrain": false,
+    "pretrain_path" : ""
+  },
+  "network": {
+    "name": "3DeepCT",
+    "in_channels": 32,
+    "out_channels": 32,
+    "model_depth": 32
+  },
+  "testing": {
+    "batch_size": 1,
+    "test_loader": {
+      "path": ["/wdata/yaelsc/Data/32_sats/subset_of_seven_clouds"],
+      "shuffle": "True",
+      "num_workers": 2,
+      "min_idx": 0,
+      "max_idx": 5,
+      "key": "beta"
+    },
+    "masks_path": "/wdata/yaelsc/Data/32_sats/subset_of_seven_clouds/masks",
+    "loss_momentum": 0.5,
+    "model_path" : "/home/yaelsc/PycharmProjects/3DeepCT/experiments/32_sats/model"
+  },
+  "loss": {
+    "name": "MSE"
+  }
+}

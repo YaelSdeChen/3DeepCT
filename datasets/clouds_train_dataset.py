@@ -5,12 +5,12 @@ import numpy as np
 import scipy.io as sio
 from torch.utils.data import Dataset
 
+
 # from Augmentations.noise import Noise
 
 
 class CloudsDataset(Dataset):
-    def __init__(self, is_train, data_paths, key: str = "beta"):
-        self.is_train = is_train
+    def __init__(self, data_paths, key: str = "beta"):
         self.images_paths = []
         self.clouds_paths = []
         self.cloud_indices = []
@@ -20,7 +20,7 @@ class CloudsDataset(Dataset):
         for data_path in data_paths:
             for cloud_path in glob.iglob(f'{data_path}/lwcs/cloud*.mat'):
                 cloud_index = cloud_path.replace(f'{data_path}/lwcs/cloud', '').replace('.mat', '')
-                if (self.is_train and int(cloud_index) > 1000 and int(cloud_index) < 1010) or (not self.is_train and int(cloud_index) <= 1000 and int(cloud_index) >= 990):
+                if int(cloud_index) > 1000 and int(cloud_index) < 1010:
                     satellites_images_path = f'{data_path}/satellites_images/satellites_images_{cloud_index}.mat'
 
                     if os.path.isfile(cloud_path) and os.path.isfile(satellites_images_path):
@@ -34,8 +34,10 @@ class CloudsDataset(Dataset):
         return len(self.images_paths)
 
     def __getitem__(self, index):
-        images_path, cloud_path, cloud_index = self.images_paths[index], self.clouds_paths[index], self.cloud_indices[
-            index]
+        images_path = self.images_paths[index]
+        cloud_path = self.clouds_paths[index]
+        cloud_index = self.cloud_indices[index]
+
         cloud = np.transpose(sio.loadmat(cloud_path)[self.key], (2, 0, 1))
         images = sio.loadmat(images_path)['satellites_images']
 

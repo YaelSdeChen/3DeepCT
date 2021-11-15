@@ -25,6 +25,8 @@ def evaluate(exp_dir, trained_model, testing_params: dict, loss_params: dict):
         net_losses = []
         relative_average_errors = []
         total_mass_errors = []
+        relative_average_errors_with_mask = []
+        total_mass_errors_with_mask = []
         cloud_indices = []
         batch_time_net = []
 
@@ -32,11 +34,14 @@ def evaluate(exp_dir, trained_model, testing_params: dict, loss_params: dict):
         evaluation_start_time = time.time()  # Time for printing
 
         for i, data in enumerate(test_loader, 0):
-            images_gt, clouds_gt, cloud_index = data
-            images_gt, clouds_gt = images_gt.to(device), clouds_gt.to(device)
+            images_gt, clouds_gt, cloud_index, masks = data
+            images_gt, clouds_gt, masks = images_gt.to(device), clouds_gt.to(device), masks.to(device)
+
+            masks = masks.permute((0, 3, 1, 2))
 
             net_start_time = time.time()
             clouds_net = trained_model(images_gt)
+            clouds_net_with_mask = clouds_net * masks
             time_net = time.time() - net_start_time
 
             loss_val = mse_loss(clouds_net, clouds_gt)
@@ -47,8 +52,14 @@ def evaluate(exp_dir, trained_model, testing_params: dict, loss_params: dict):
             relative_average_error = get_relative_average_error(clouds_gt, clouds_net)
             total_mass_error = get_total_mass_error(clouds_gt, clouds_net)
 
+            relative_average_error_with_mask = get_relative_average_error(clouds_gt, clouds_net_with_mask)
+            total_mass_error_with_mask = get_total_mass_error(clouds_gt, clouds_net_with_mask)
+
             relative_average_errors.append(relative_average_error.data.cpu().item())
             total_mass_errors.append(total_mass_error.data.cpu().item())
+
+            relative_average_errors_with_mask.append(relative_average_error_with_mask.data.cpu().item())
+            total_mass_errors_with_mask.append(total_mass_error_with_mask.data.cpu().item())
 
             if batch_clouds_net is not None:
                 batch_clouds_net = torch.cat((batch_clouds_net, clouds_net), 0)
@@ -68,6 +79,8 @@ def evaluate(exp_dir, trained_model, testing_params: dict, loss_params: dict):
                   'loss': net_losses,
                   'relative_average_error': relative_average_errors,
                   'total_mass_error': total_mass_errors,
+                  'relative_average_error_with_mask': relative_average_errors_with_mask,
+                  'total_mass_error_with_mask': total_mass_errors_with_mask,
                   'clouds_net': batch_clouds_net.cpu().detach().numpy(),
                   'net_time': batch_time_net,
                   'cloud_indices': cloud_indices}
@@ -87,6 +100,7 @@ if __name__ == '__main__':
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     # device = 'cpu'
+    print(f"Device: {device}")
 
     parser = ArgumentParser()
     parser.add_argument('--exp_dir', type=str, help='Path to experiment directory')
@@ -100,6 +114,12 @@ if __name__ == '__main__':
 
     net = get_net(network_params)
     net.to(device)
+
+    model_path = testing_params["model_path"]
+    if not os.path.exists(model_path):
+        print(f"Model path {model_path} does not exists!")
+        exit()
     net.load_state_dict(torch.load(testing_params["model_path"]))
 
     evaluate(args.exp_dir, net, testing_params, loss_params)
+
