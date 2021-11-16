@@ -6,7 +6,7 @@
     "batch_size": 32,
     "max_epochs": 1000,
     "train_loader": {
-      "path": ["/wdata/yaelsc/Data/32_sats/08_10_2020"],
+      "path": ["../data/your_data/train/"],
       "shuffle": "True",
       "num_workers": 16,
       "eval_percent": 0.2,
@@ -32,16 +32,16 @@
   "testing": {
     "batch_size": 1,
     "test_loader": {
-      "path": ["/wdata/yaelsc/Data/32_sats/subset_of_seven_clouds"],
+      "path": ["../data/your_data/test/"],
       "shuffle": "True",
       "num_workers": 2,
       "min_idx": 0,
       "max_idx": 5,
       "key": "beta"
     },
-    "masks_path": "/wdata/yaelsc/Data/32_sats/subset_of_seven_clouds/masks",
+    "masks_path": "../data/your_data/masks",
     "loss_momentum": 0.5,
-    "model_path" : "/home/yaelsc/PycharmProjects/3DeepCT/experiments/32_sats/model"
+    "model_path" : "/experiments/32_sats/32_sats_model"
   },
   "loss": {
     "name": "MSE"

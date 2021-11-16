@@ -6,7 +6,7 @@
     "batch_size": 32,
     "max_epochs": 1004,
     "train_loader": {
-      "path": ["/wdata/yaelsc/Data/CASS_50m_256x256x139_600CCN/"],
+      "path": ["../data/your_data/train/"],
       "shuffle": "True",
       "num_workers": 1,
       "eval_percent": 0.2,
@@ -21,7 +21,7 @@
     },
     "eval_epoch_gap": 10,
     "use_pretrain": false,
-    "pretrain_path" : "/home/yaelsc/PycharmProjects/3DeepCT/experiments/example/checkpoint_1"
+    "pretrain_path" : "/experiments/example/checkpoint_1"
   },
   "network": {
     "name": "3DeepCT",
@@ -32,7 +32,7 @@
   "testing": {
     "batch_size": 1,
     "test_loader": {
-      "path": ["/wdata/yaelsc/Data/CASS_50m_256x256x139_600CCN/"],
+      "path": ["../data/your_data/test/"],
       "shuffle": "True",
       "num_workers": 2,
       "min_idx": 0,
@@ -40,7 +40,7 @@
       "key": "beta"
     },
     "loss_momentum": 0.5,
-    "model_path" : "/home/yaelsc/PycharmProjects/3DeepCT/experiments/example/model_1"
+    "model_path" : "/experiments/example/model_1"
   },
   "loss": {
     "name": "MSE"
