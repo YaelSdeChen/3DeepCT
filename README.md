@@ -47,6 +47,15 @@ You can see an example in 3DeepCT\experiments\example.
  Evaluation will test the model specified in {model_path} from the config.json file.
  At the end of the evaluation, an evaluation_result.mat file will be saved in {EXP_DIR}.
 
+### Data
+The seven-clouds-subset used in the paper can be downloaded [here](https://drive.google.com/file/d/1_gLSckMLtNRd5yKovigAHyXg-dmDKR0Y/view?usp=sharing).
+
+### Models
+The 10 satellites trained model can be downloaded [here](https://drive.google.com/file/d/19bpJ3DDV7dmgxNOtdl-fmn5WKzEGWoHW/view?usp=sharing).
+
+The 32 satellites trained model can be downloaded [here](https://drive.google.com/file/d/1hyASgf0WMyOAJfXR6NBnmd_SizBVk2H0/view?usp=sharing).
+
+
 # Citation
 If you make use of our work, please cite our paper:
 
@@ -59,3 +68,20 @@ If you make use of our work, please cite our paper:
   year={2021}
 }
 ```
+
+Thanks to Eshkol Eytan for the clouds data we used to train and test out model.
+If you are using the data please cite:
+```
+@article{eytan2021revisiting,
+  title={Revisiting adiabatic fraction estimations in cumulus clouds: high-resolution simulations with a passive tracer},
+  author={Eytan, Eshkol and Koren, Ilan and Altaratz, Orit and Pinsky, Mark and Khain, Alexander},
+  journal={Atmospheric Chemistry and Physics},
+  volume={21},
+  number={21},
+  pages={16203--16217},
+  year={2021},
+  publisher={Copernicus GmbH}
+}
+```
+
+
