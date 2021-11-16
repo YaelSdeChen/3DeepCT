@@ -69,7 +69,7 @@ If you make use of our work, please cite our paper:
 }
 ```
 
-Thanks to Eshkol Eytan for the clouds data we used to train and test out model.
+Thanks to Eshkol Eytan for the clouds data we used to train and test our model.
 If you are using the data please cite:
 ```
 @article{eytan2021revisiting,
