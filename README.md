@@ -6,7 +6,7 @@ The architecture is dictated by the stationary nature of atmospheric cloud field
 The task of volumetric scattering tomography aims at recovering a volume from its 2D projections. This problem has been approached by diverse inverse methods based on signal processing and physics models. However, such techniques are typically iterative, exhibiting a high computational load and a long convergence time.
 We show that 3DeepCT outperforms physics-based inverse scattering methods, in  accuracy, as well as offering orders of magnitude improvement in computational run-time. We further introduce a hybrid model that combines 3DeepCT and physics-based analysis. The resultant hybrid technique enjoys fast inference time and improved recovery performance.
 
-
+https://user-images.githubusercontent.com/62201490/141940761-176296be-4fc0-4657-94a4-6439fe61267b.mp4
 
 ## Description
 This repository contains the official implementation of 3DeepCT, a deep neural network for cloud-fields computed tomography.
