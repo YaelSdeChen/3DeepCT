@@ -39,7 +39,6 @@
       "max_idx": 5,
       "key": "beta"
     },
-    "masks_path": "../data/your_data/masks",
     "loss_momentum": 0.5,
     "model_path" : "/experiments/32_sats/32_sats_model"
   },

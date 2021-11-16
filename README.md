@@ -51,7 +51,7 @@ You can see an example in 3DeepCT\experiments\example.
 The seven-clouds-subset used in the paper can be downloaded [here](https://drive.google.com/file/d/1_gLSckMLtNRd5yKovigAHyXg-dmDKR0Y/view?usp=sharing).
 
 ### Models
-The 10 satellites trained model can be downloaded [here](https://drive.google.com/file/d/19bpJ3DDV7dmgxNOtdl-fmn5WKzEGWoHW/view?usp=sharing).
+The 10 satellites trained model can be downloaded [here](https://drive.google.com/file/d/1Lks_o1bsw67PXZYRzXjLkH12X6yY8O9j/view?usp=sharing).
 
 The 32 satellites trained model can be downloaded [here](https://drive.google.com/file/d/1hyASgf0WMyOAJfXR6NBnmd_SizBVk2H0/view?usp=sharing).
 

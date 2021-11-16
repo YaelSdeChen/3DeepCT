@@ -6,9 +6,6 @@ import scipy.io as sio
 from torch.utils.data import Dataset
 
 
-# from Augmentations.noise import Noise
-
-
 class CloudsTestDataset(Dataset):
     def __init__(self, data_paths, key: str = "beta"):
         self.images_paths = []
@@ -43,16 +40,15 @@ class CloudsTestDataset(Dataset):
         cloud = np.transpose(sio.loadmat(cloud_path)[self.key], (2, 0, 1))
         images = sio.loadmat(images_path)['satellites_images']
         if os.path.exists(mask_path):
-            mask = (sio.loadmat(mask_path)['CARVER']).permute((0, 3, 1, 2))
+            mask = sio.loadmat(mask_path)['CARVER']
         else:
             mask = torch.ones(cloud.shape)
-        # images = self.noise.add_noise(images)
 
         if not torch.is_tensor(images):
             images = torch.tensor(images).float()
         if not torch.is_tensor(cloud):
             cloud = torch.tensor(cloud).float()
         if not torch.is_tensor(mask):
-            mask = torch.tensor(mask).float()
+            mask = torch.tensor(mask).float().permute((2, 0, 1))
 
         return images, cloud, cloud_index, mask

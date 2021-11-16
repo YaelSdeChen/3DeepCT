@@ -37,8 +37,6 @@ def evaluate(exp_dir, trained_model, testing_params: dict, loss_params: dict):
             images_gt, clouds_gt, cloud_index, masks = data
             images_gt, clouds_gt, masks = images_gt.to(device), clouds_gt.to(device), masks.to(device)
 
-            masks = masks.permute((0, 3, 1, 2))
-
             net_start_time = time.time()
             clouds_net = trained_model(images_gt)
             clouds_net_with_mask = clouds_net * masks
